@@ -1,0 +1,7 @@
+# Default ignored files
+/shelf/
+/workspace.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+# CodeStream ignored files
+/../../lama_dev_complete_course_youtube_2014\.idea/codestream.xml
