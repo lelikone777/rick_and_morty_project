@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect } from "react";
+// Page.js
+import React, { useState, useEffect } from "react";
 import { getChars } from "@/actions/chars.action";
 import { CharsModel } from "@/models/chars.model";
 import Link from "next/link";
@@ -11,6 +12,7 @@ export default function Page() {
   const [chars, setChars] = useState([]);
   const [perPage, setPerPage] = useState(20); // Default per page
   const [currentPage, setCurrentPage] = useState(1);
+  const [charactersPerPage, setCharactersPerPage] = useState(20); // Characters to show per page
   const [filteredChars, setFilteredChars] = useState([]); // Filtered characters
   const [totalPages, setTotalPages] = useState(0); // Total pages
 
@@ -30,10 +32,10 @@ export default function Page() {
     );
     setFilteredChars(filtered);
 
-    const totalPages = Math.ceil(filtered.length / perPage);
+    const totalPages = Math.ceil(filtered.length / charactersPerPage);
     setTotalPages(totalPages);
     setCurrentPage(1); // Reset current page when filtered characters change
-  }, [searchText, chars, perPage]);
+  }, [searchText, chars, charactersPerPage]);
 
   const handleSearch = (text: string) => {
     setSearchText(text);
@@ -44,13 +46,20 @@ export default function Page() {
     if (value === -1) {
       // Show all characters
       setPerPage(chars.length);
+      setCharactersPerPage(chars.length);
     } else {
       setPerPage(value);
+      setCharactersPerPage(value);
     }
   };
 
-  const startIndex = (currentPage - 1) * perPage;
-  const endIndex = startIndex + perPage;
+  const handleShowMore = () => {
+    // Increase the number of characters to show per page
+    setCharactersPerPage((prev) => prev + perPage);
+  };
+
+  const startIndex = (currentPage - 1) * charactersPerPage;
+  const endIndex = startIndex + charactersPerPage;
   const visibleCharsOnPage = filteredChars.slice(startIndex, endIndex);
 
   const renderPageButtons = () => {
@@ -121,6 +130,11 @@ export default function Page() {
             disabled={currentPage === totalPages}
           />
         </div>
+      )}
+
+      {/* Show more button */}
+      {filteredChars.length > charactersPerPage && (
+        <button onClick={handleShowMore}>Show More</button>
       )}
     </div>
   );

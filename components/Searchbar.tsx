@@ -1,8 +1,11 @@
-// Searchbar.js
-import React from "react";
+import React, { ChangeEvent } from "react";
 
-const Searchbar = ({ onSearch }) => {
-  const handleChange = (event) => {
+interface SearchbarProps {
+  onSearch: (value: string) => void;
+}
+
+const Searchbar: React.FC<SearchbarProps> = ({ onSearch }) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onSearch(event.target.value);
   };
 
