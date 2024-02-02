@@ -1,4 +1,5 @@
 import React from "react";
+import { Button } from "@/components/ui/button";
 
 interface NavPagesButtonProps {
   text: string;
@@ -14,15 +15,13 @@ const NavPagesButton: React.FC<NavPagesButtonProps> = ({
   active = false,
 }) => {
   return (
-    <button
+    <Button
       onClick={onClick}
       disabled={disabled}
-      className={`rounded border px-4 py-2 ${
-        active ? "bg-blue-500 text-white" : "bg-gray-200 text-gray-600"
-      }`}
+      variant={active ? "default" : "outline"}
     >
       {text}
-    </button>
+    </Button>
   );
 };
 

@@ -1,11 +1,14 @@
 "use client";
-// Page.js
 import React, { useState, useEffect } from "react";
 import { getChars } from "@/actions/chars.action";
 import { CharsModel } from "@/models/chars.model";
 import Link from "next/link";
 import Searchbar from "@/components/Searchbar";
+import { ModeToggle } from "@/components/ModeToggle";
+import { Button } from "@/components/ui/button";
+import NavPages from "@/components/NavPages";
 import NavPagesButton from "@/components/NavPagesButton";
+import CharCard from "@/components/CharCard";
 
 export default function Page() {
   const [searchText, setSearchText] = useState("");
@@ -22,11 +25,10 @@ export default function Page() {
       setChars(charsData || []);
     };
 
-    fetchData();
+    fetchData().then();
   }, []);
 
   useEffect(() => {
-    // Update filtered characters and total pages when searchText or chars change
     const filtered = chars.filter((char: CharsModel) =>
       char.name.toLowerCase().includes(searchText.toLowerCase()),
     );
@@ -54,7 +56,6 @@ export default function Page() {
   };
 
   const handleShowMore = () => {
-    // Increase the number of characters to show per page
     setCharactersPerPage((prev) => prev + perPage);
   };
 
@@ -83,58 +84,41 @@ export default function Page() {
   };
 
   return (
-    <div>
+    <div className="container">
       <h1>Characters List</h1>
 
-      <Searchbar onSearch={handleSearch} />
+      <nav>
+        <Searchbar onSearch={handleSearch} />
 
-      {/* Dropdown for selecting number of characters per page */}
-      <select value={perPage} onChange={handlePerPageChange}>
-        <option value={20}>20 per page</option>
-        <option value={40}>40 per page</option>
-        <option value={80}>80 per page</option>
-        <option value={-1}>Show all characters</option>
-      </select>
+        <select value={perPage} onChange={handlePerPageChange}>
+          <option value={20}>20 per page</option>
+          <option value={40}>40 per page</option>
+          <option value={80}>80 per page</option>
+          <option value={-1}>Show all characters</option>
+        </select>
 
-      <ul>
+        <ModeToggle />
+      </nav>
+
+      <ul className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
         {visibleCharsOnPage.map((char: CharsModel) => (
           <li key={char.id}>
-            <Link href={`/char/${char.id}`}>{char.name}</Link>
+            <Link href={`/char/${char.id}`}>
+              <CharCard char={char} />
+            </Link>
           </li>
         ))}
       </ul>
 
-      {totalPages > 1 && (
-        <div className="my-3 flex gap-x-3">
-          <NavPagesButton
-            text="<<"
-            onClick={() => setCurrentPage(1)}
-            disabled={currentPage === 1}
-          />
-          <NavPagesButton
-            text="<"
-            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-            disabled={currentPage === 1}
-          />
-          {renderPageButtons()}
-          <NavPagesButton
-            text=">"
-            onClick={() =>
-              setCurrentPage((prev) => Math.min(prev + 1, totalPages))
-            }
-            disabled={currentPage === totalPages}
-          />
-          <NavPagesButton
-            text=">>"
-            onClick={() => setCurrentPage(totalPages)}
-            disabled={currentPage === totalPages}
-          />
-        </div>
-      )}
+      <NavPages
+        totalPages={totalPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        renderPageButtons={renderPageButtons}
+      />
 
-      {/* Show more button */}
       {filteredChars.length > charactersPerPage && (
-        <button onClick={handleShowMore}>Show More</button>
+        <Button onClick={handleShowMore}>Show More</Button>
       )}
     </div>
   );
