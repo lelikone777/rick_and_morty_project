@@ -9,6 +9,9 @@ const config = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
+  screens: {
+    xs: "480px",
+  },
   prefix: "",
   theme: {
     container: {

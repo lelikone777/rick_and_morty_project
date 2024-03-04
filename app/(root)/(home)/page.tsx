@@ -4,7 +4,6 @@ import { getChars } from "@/actions/chars.action";
 import { CharsModel } from "@/models/chars.model";
 import Link from "next/link";
 import Searchbar from "@/components/Searchbar";
-import { ModeToggle } from "@/components/ModeToggle";
 import { Button } from "@/components/ui/button";
 import NavPages from "@/components/NavPages";
 import NavPagesButton from "@/components/NavPagesButton";
@@ -15,7 +14,6 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -53,15 +51,15 @@ export default function Page() {
     setSearchText(text);
   };
 
-  const handlePerPageChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = Number(event.target.value);
-    if (value === -1) {
+  const handlePerPageChange = (value: string) => {
+    const numericValue = Number(value);
+    if (numericValue === -1) {
       // Show all characters
       setPerPage(chars.length);
       setCharactersPerPage(chars.length);
     } else {
-      setPerPage(value);
-      setCharactersPerPage(value);
+      setPerPage(numericValue);
+      setCharactersPerPage(numericValue);
     }
   };
 
@@ -98,30 +96,19 @@ export default function Page() {
         <div className="flex items-center space-x-6 py-6 [&>*]:rounded [&>*]:bg-accent">
           <Searchbar onSearch={handleSearch} />
 
-          <select value={perPage} onChange={handlePerPageChange}>
-            <option value={20}>20 per page</option>
-            <option value={40}>40 per page</option>
-            <option value={80}>80 per page</option>
-            <option value={-1}>Show all characters</option>
-          </select>
-
-          <Select>
+          <Select onValueChange={handlePerPageChange}>
             <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder={perPage} />
+              <SelectValue placeholder={perPage + " per page"} />
             </SelectTrigger>
             <SelectContent>
               <SelectGroup>
-                <SelectLabel>Fruits</SelectLabel>
-                <SelectItem value="apple">Apple</SelectItem>
-                <SelectItem value="banana">Banana</SelectItem>
-                <SelectItem value="blueberry">Blueberry</SelectItem>
-                <SelectItem value="grapes">Grapes</SelectItem>
-                <SelectItem value="pineapple">Pineapple</SelectItem>
+                <SelectItem value="20">20 per page</SelectItem>
+                <SelectItem value="40">40 per page</SelectItem>
+                <SelectItem value="80">80 per page</SelectItem>
+                <SelectItem value="-1">Show all characters</SelectItem>
               </SelectGroup>
             </SelectContent>
           </Select>
-
-          <ModeToggle />
         </div>
 
         <ul className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">

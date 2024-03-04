@@ -16,7 +16,7 @@ const NavPages: React.FC<NavPagesProps> = ({
 }) => {
   return (
     totalPages > 1 && (
-      <div className="my-3 flex gap-x-3">
+      <div className="my-3 flex hidden gap-x-3">
         <NavPagesButton
           text="<<"
           onClick={() => setCurrentPage(1)}
