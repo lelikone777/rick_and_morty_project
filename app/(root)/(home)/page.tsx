@@ -93,7 +93,7 @@ export default function Page() {
   return (
     <div>
       <div className="container">
-        <div className="flex items-center space-x-6 py-6 [&>*]:rounded [&>*]:bg-accent">
+        <div className="flex flex-col items-center gap-y-3 space-x-6 py-6 xs:flex-row [&>*]:rounded [&>*]:bg-accent">
           <Searchbar onSearch={handleSearch} />
 
           <Select onValueChange={handlePerPageChange}>

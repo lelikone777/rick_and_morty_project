@@ -22,6 +22,8 @@ const Header = () => {
             alt="logo"
             width={160}
             height={40}
+            className="w-auto"
+            priority
           />
         </Link>
 

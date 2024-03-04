@@ -1,22 +1,34 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 const NavMenu = ({ area }: { area: string }) => {
+  const router = usePathname();
+
   return (
     <nav
-      className={` gap-x-6 ${area === "header-menu" ? "hidden md:flex" : ""}  ${area === "header-sidebar" ? "w-full" : "w-fit"} `}
+      className={`${area === "header-menu" ? "hidden md:flex" : ""}  ${area === "header-sidebar" ? "w-full" : "w-fit"} `}
     >
       <ul
-        className={`flex items-center text-2xl font-bold ${area === "header-sidebar" ? "w-full flex-col justify-center gap-x-0 space-y-6 pt-8" : "gap-x-6"}`}
+        className={`flex items-center text-2xl font-bold text-foreground ${area === "header-sidebar" ? "w-full flex-col justify-center gap-x-0 space-y-6 pt-8" : "gap-x-6"}`}
       >
-        <li>
-          <Link href="">Characters</Link>
+        <li className={router === "/" ? "border-b-4 border-underline" : ""}>
+          <Link href="/">Characters</Link>
         </li>
-        <li>
-          <Link href="">Episodes</Link>
+        <li
+          className={
+            router === "/episodes" ? "border-b-4 border-underline" : ""
+          }
+        >
+          <Link href="/episodes">Episodes</Link>
         </li>
-        <li>
-          <Link href="">Locations</Link>
+        <li
+          className={
+            router === "/locations" ? "border-b-4 border-underline" : ""
+          }
+        >
+          <Link href="/locations">Locations</Link>
         </li>
       </ul>
     </nav>

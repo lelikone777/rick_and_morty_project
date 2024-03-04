@@ -9,9 +9,6 @@ const config = {
     "./app/**/*.{ts,tsx}",
     "./src/**/*.{ts,tsx}",
   ],
-  screens: {
-    xs: "480px",
-  },
   prefix: "",
   theme: {
     container: {
@@ -24,6 +21,9 @@ const config = {
       },
     },
     extend: {
+      screens: {
+        xs: "480px",
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
@@ -33,6 +33,7 @@ const config = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        underline: "hsl(var(--underline))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

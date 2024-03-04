@@ -1,4 +1,5 @@
 import React, { ChangeEvent } from "react";
+import { Input } from "@/components/ui/input";
 
 interface SearchbarProps {
   onSearch: (value: string) => void;
@@ -10,11 +11,11 @@ const Searchbar: React.FC<SearchbarProps> = ({ onSearch }) => {
   };
 
   return (
-    <input
+    <Input
       type="text"
       name="search"
       id="search"
-      className="my-2 border-slate-300 p-2.5 text-black placeholder:text-slate-400"
+      className=""
       placeholder="Search character"
       autoComplete="off"
       onChange={handleChange}
