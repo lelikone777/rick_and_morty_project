@@ -10,14 +10,24 @@ import NavPages from "@/components/NavPages";
 import NavPagesButton from "@/components/NavPagesButton";
 import CharCard from "@/components/CharCard";
 
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
 export default function Page() {
   const [searchText, setSearchText] = useState("");
   const [chars, setChars] = useState([]);
-  const [perPage, setPerPage] = useState(20); // Default per page
+  const [perPage, setPerPage] = useState(20);
   const [currentPage, setCurrentPage] = useState(1);
-  const [charactersPerPage, setCharactersPerPage] = useState(20); // Characters to show per page
-  const [filteredChars, setFilteredChars] = useState([]); // Filtered characters
-  const [totalPages, setTotalPages] = useState(0); // Total pages
+  const [charactersPerPage, setCharactersPerPage] = useState(20);
+  const [filteredChars, setFilteredChars] = useState([]);
+  const [totalPages, setTotalPages] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +46,7 @@ export default function Page() {
 
     const totalPages = Math.ceil(filtered.length / charactersPerPage);
     setTotalPages(totalPages);
-    setCurrentPage(1); // Reset current page when filtered characters change
+    setCurrentPage(1);
   }, [searchText, chars, charactersPerPage]);
 
   const handleSearch = (text: string) => {
@@ -79,47 +89,62 @@ export default function Page() {
         />,
       );
     }
-
     return pageButtons;
   };
 
   return (
-    <div className="container">
-      <h1>Characters List</h1>
+    <div>
+      <div className="container">
+        <div className="flex items-center space-x-6 py-6 [&>*]:rounded [&>*]:bg-accent">
+          <Searchbar onSearch={handleSearch} />
 
-      <nav>
-        <Searchbar onSearch={handleSearch} />
+          <select value={perPage} onChange={handlePerPageChange}>
+            <option value={20}>20 per page</option>
+            <option value={40}>40 per page</option>
+            <option value={80}>80 per page</option>
+            <option value={-1}>Show all characters</option>
+          </select>
 
-        <select value={perPage} onChange={handlePerPageChange}>
-          <option value={20}>20 per page</option>
-          <option value={40}>40 per page</option>
-          <option value={80}>80 per page</option>
-          <option value={-1}>Show all characters</option>
-        </select>
+          <Select>
+            <SelectTrigger className="w-[180px]">
+              <SelectValue placeholder={perPage} />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Fruits</SelectLabel>
+                <SelectItem value="apple">Apple</SelectItem>
+                <SelectItem value="banana">Banana</SelectItem>
+                <SelectItem value="blueberry">Blueberry</SelectItem>
+                <SelectItem value="grapes">Grapes</SelectItem>
+                <SelectItem value="pineapple">Pineapple</SelectItem>
+              </SelectGroup>
+            </SelectContent>
+          </Select>
 
-        <ModeToggle />
-      </nav>
+          <ModeToggle />
+        </div>
 
-      <ul className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-        {visibleCharsOnPage.map((char: CharsModel) => (
-          <li key={char.id}>
-            <Link href={`/char/${char.id}`}>
-              <CharCard char={char} />
-            </Link>
-          </li>
-        ))}
-      </ul>
+        <ul className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
+          {visibleCharsOnPage.map((char: CharsModel) => (
+            <li key={char.id}>
+              <Link href={`/char/${char.id}`}>
+                <CharCard char={char} />
+              </Link>
+            </li>
+          ))}
+        </ul>
 
-      <NavPages
-        totalPages={totalPages}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        renderPageButtons={renderPageButtons}
-      />
+        <NavPages
+          totalPages={totalPages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          renderPageButtons={renderPageButtons}
+        />
 
-      {filteredChars.length > charactersPerPage && (
-        <Button onClick={handleShowMore}>Show More</Button>
-      )}
+        {filteredChars.length > charactersPerPage && (
+          <Button onClick={handleShowMore}>Show More</Button>
+        )}
+      </div>
     </div>
   );
 }
