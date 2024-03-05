@@ -87,4 +87,7 @@
   .hover-simple {
     @apply hover:opacity-60 ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
   }
+  .hover-duration {
+    @apply transition-all duration-300
+  }
 }

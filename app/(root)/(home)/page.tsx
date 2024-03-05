@@ -98,10 +98,11 @@ export default function Page() {
       >
         <ul className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {visibleCharsOnPage.map((char: CharsModel) => (
-            <li key={char.id}>
-              <Link href={`/char/${char.id}`}>
-                <CharCard char={char} />
-              </Link>
+            <li
+              key={char.id}
+              className="hover-duration hover:border-input hover:shadow-xl dark:hover:bg-accent dark:hover:text-foreground"
+            >
+              <CharCard char={char} />
             </li>
           ))}
         </ul>
