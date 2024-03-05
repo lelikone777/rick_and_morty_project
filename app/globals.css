@@ -79,3 +79,12 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .hover-underline {
+    @apply ring-offset-background transition-colors duration-300 hover:text-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+  }
+  .hover-simple {
+    @apply hover:opacity-60 ring-offset-background transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2
+  }
+}

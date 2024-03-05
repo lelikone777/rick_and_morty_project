@@ -10,8 +10,10 @@ const CharCard = ({ char }: { char: any }) => {
           className="rounded object-cover"
         />
       </div>
-      <p className="text-2xl">{char.name}</p>
-      <p className="text-xl">{char.species}</p>
+      <div className="max-xs:px-4">
+        <p className="text-2xl">{char.name}</p>
+        <p className="text-xl">{char.species}</p>
+      </div>
     </>
   );
 };

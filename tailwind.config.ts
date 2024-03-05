@@ -23,7 +23,7 @@ const config = {
     extend: {
       screens: {
         xs: "480px",
-        "2xs": "562px",
+        "2xs": "534px",
       },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
@@ -78,6 +78,10 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+      },
+      boxShadow: {
+        "top-lg":
+          "0 -10px 15px -3px rgba(0, 0, 0, 0.1), 0 -4px 6px -4px rgba(0, 0, 0, 0.1)",
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",

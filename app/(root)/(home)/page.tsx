@@ -93,7 +93,9 @@ export default function Page() {
         </div>
       </div>
 
-      <div className="container">
+      <div
+        className={`sm:container ${typeof window !== "undefined" && window.innerWidth >= 480 ? "container" : ""}`}
+      >
         <ul className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {visibleCharsOnPage.map((char: CharsModel) => (
             <li key={char.id}>
@@ -114,7 +116,12 @@ export default function Page() {
         />
 
         {filteredChars.length > charactersPerPage && (
-          <Button onClick={handleShowMore}>Show More</Button>
+          <Button
+            onClick={handleShowMore}
+            className="w-full self-center 2xs:w-fit"
+          >
+            Show More
+          </Button>
         )}
       </div>
     </div>

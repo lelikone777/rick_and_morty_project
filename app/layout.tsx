@@ -36,7 +36,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased",
+          "min-h-screen bg-background font-sans antialiased flex flex-col justify-between",
           fontSans.variable,
         )}
       >
@@ -46,8 +46,10 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <Header />
-          <div className="">{children}</div>
+          <div>
+            <Header />
+            <div className="">{children}</div>
+          </div>
           <Footer />
         </ThemeProvider>
       </body>
