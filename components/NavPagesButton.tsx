@@ -19,6 +19,7 @@ const NavPagesButton: React.FC<NavPagesButtonProps> = ({
       onClick={onClick}
       disabled={disabled}
       variant={active ? "default" : "outline"}
+      className=""
     >
       {text}
     </Button>

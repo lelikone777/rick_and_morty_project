@@ -5,7 +5,7 @@ interface SearchbarProps {
   onSearch: (value: string) => void;
 }
 
-const Searchbar: React.FC<SearchbarProps> = ({ onSearch }) => {
+const CharsSearchbar: React.FC<SearchbarProps> = ({ onSearch }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     onSearch(event.target.value);
   };
@@ -23,4 +23,4 @@ const Searchbar: React.FC<SearchbarProps> = ({ onSearch }) => {
   );
 };
 
-export default Searchbar;
+export default CharsSearchbar;

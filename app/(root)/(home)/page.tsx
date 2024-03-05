@@ -1,22 +1,14 @@
 "use client";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 import { getChars } from "@/actions/chars.action";
 import { CharsModel } from "@/models/chars.model";
-import Link from "next/link";
-import Searchbar from "@/components/Searchbar";
+import CharsSearchbar from "@/components/chars/CharsSearchbar";
 import { Button } from "@/components/ui/button";
 import NavPages from "@/components/NavPages";
 import NavPagesButton from "@/components/NavPagesButton";
 import CharCard from "@/components/CharCard";
-
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import CharsPerPageFilter from "@/components/chars/CharsPerPageFilter";
 
 export default function Page() {
   const [searchText, setSearchText] = useState("");
@@ -54,7 +46,6 @@ export default function Page() {
   const handlePerPageChange = (value: string) => {
     const numericValue = Number(value);
     if (numericValue === -1) {
-      // Show all characters
       setPerPage(chars.length);
       setCharactersPerPage(chars.length);
     } else {
@@ -93,24 +84,16 @@ export default function Page() {
   return (
     <div>
       <div className="container">
-        <div className="flex flex-col items-center gap-y-3 space-x-6 py-6 xs:flex-row [&>*]:rounded [&>*]:bg-accent">
-          <Searchbar onSearch={handleSearch} />
-
-          <Select onValueChange={handlePerPageChange}>
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder={perPage + " per page"} />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="20">20 per page</SelectItem>
-                <SelectItem value="40">40 per page</SelectItem>
-                <SelectItem value="80">80 per page</SelectItem>
-                <SelectItem value="-1">Show all characters</SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+        <div className="flex flex-col items-center gap-x-6 gap-y-3 py-6 max-xs:gap-x-0 xs:flex-row [&>*]:rounded [&>*]:bg-accent">
+          <CharsSearchbar onSearch={handleSearch} />
+          <CharsPerPageFilter
+            perPage={perPage}
+            handlePerPageChange={handlePerPageChange}
+          />
         </div>
+      </div>
 
+      <div className="container">
         <ul className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {visibleCharsOnPage.map((char: CharsModel) => (
             <li key={char.id}>
@@ -120,7 +103,9 @@ export default function Page() {
             </li>
           ))}
         </ul>
+      </div>
 
+      <div className="container my-8 flex flex-col justify-center gap-y-6">
         <NavPages
           totalPages={totalPages}
           currentPage={currentPage}

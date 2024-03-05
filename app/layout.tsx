@@ -4,7 +4,7 @@ import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { cn } from "@/lib/utils";
-import Header from "@/components/Header";
+import Header from "@/components/header/Header";
 import Footer from "@/components/Footer";
 
 const fontSans = FontSans({
