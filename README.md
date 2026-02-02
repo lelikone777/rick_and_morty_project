@@ -1,4 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rick and Morty Explorer
+
+A fan-made dashboard for browsing Rick and Morty data, built with [Next.js](https://nextjs.org/) and styled with Tailwind CSS.
+
+## Project Overview
+
+- Browse character, location, and episode data from the Rick and Morty universe.
+- Built as a fast, responsive Next.js application.
+- Uses modern React patterns, including server components where applicable.
+
+---
+
+This project was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
