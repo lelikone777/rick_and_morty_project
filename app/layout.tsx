@@ -1,11 +1,9 @@
 import { ThemeProvider } from "@/components/ThemeProvider";
 import type { Metadata } from "next";
-import { Inter as FontSans } from "next/font/google";
+import { Roboto as FontSans } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import { cn } from "@/lib/utils";
-import Header from "@/components/header/Header";
-import Footer from "@/components/Footer";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -37,7 +35,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen bg-background font-sans antialiased flex flex-col justify-between",
+          "flex min-h-screen flex-col justify-between bg-background font-sans text-base antialiased",
           fontSans.variable,
         )}
       >
@@ -47,11 +45,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div>
-            <Header />
-            <div className="">{children}</div>
-          </div>
-          <Footer />
+          {children}
         </ThemeProvider>
       </body>
     </html>
