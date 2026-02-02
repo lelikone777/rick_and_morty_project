@@ -20,11 +20,12 @@ export const metadata: Metadata = {
   icons: {
     icon: "/imgs/Rick_and_Morty.png",
   },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
 };
 
 export default function RootLayout({
