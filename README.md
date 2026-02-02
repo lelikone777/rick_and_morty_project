@@ -1,4 +1,16 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rick and Morty Explorer
+
+A fan-made dashboard for browsing Rick and Morty data, built with [Next.js](https://nextjs.org/) and styled with Tailwind CSS.
+
+## Project Overview
+
+- Browse character, location, and episode data from the Rick and Morty universe.
+- Built as a fast, responsive Next.js application.
+- Uses modern React patterns, including server components where applicable.
+
+---
+
+This project was bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
@@ -19,6 +31,14 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+
+## Vercel Deploy Test
+
+Run a build locally to match the Vercel deployment pipeline:
+
+```bash
+npm run vercel:build
+```
 
 ## Learn More
 
