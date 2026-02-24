@@ -1,19 +1,50 @@
-import {baseUrl} from "@/constants";
+import { baseUrl } from "@/constants";
 
 export async function getLocations() {
-    const response = await fetch(`${baseUrl}/location`);
-    if (!response.ok) {
-        throw new Error('Failed to fetch data getLocs');
-    }
-    const data = await response.json();
-    return data.results;
+  const firstPageResponse = await fetch(`${baseUrl}location`, {
+    cache: "no-store",
+  });
+
+  if (!firstPageResponse.ok) {
+    throw new Error("Failed to fetch locations");
+  }
+
+  const firstPageData = await firstPageResponse.json();
+  const totalPages = firstPageData.info?.pages ?? 1;
+
+  if (totalPages === 1) {
+    return firstPageData.results;
+  }
+
+  const restPageRequests = Array.from({ length: totalPages - 1 }, (_, i) =>
+    fetch(`${baseUrl}location?page=${i + 2}`, { cache: "no-store" }),
+  );
+
+  const restPageResponses = await Promise.all(restPageRequests);
+  const restPageData = await Promise.all(
+    restPageResponses.map(async (response) => {
+      if (!response.ok) {
+        throw new Error("Failed to fetch locations page");
+      }
+
+      return response.json();
+    }),
+  );
+
+  return [
+    ...firstPageData.results,
+    ...restPageData.flatMap((page) => page.results),
+  ];
 }
 
 export async function getLocation(locationId: string) {
-    const response = await fetch(`${baseUrl}/location/${locationId}`);
-    if (!response.ok) {
-        throw new Error('Failed to fetch data getLoc');
-    }
-    return await response.json();
-}
+  const response = await fetch(`${baseUrl}location/${locationId}`, {
+    cache: "no-store",
+  });
 
+  if (!response.ok) {
+    throw new Error("Failed to fetch location");
+  }
+
+  return await response.json();
+}
