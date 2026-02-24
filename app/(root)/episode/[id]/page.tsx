@@ -1,11 +1,11 @@
-import { getLocation } from "@/actions/locations.action";
-// import Location from "@/components/Location";
+import { getEpisode } from "@/actions/episodes.action";
 import Episode from "@/components/Episode";
 
 const Page = async ({ params }: { params: { id: string } }) => {
-  const episode = await getLocation(params.id);
+  const episode = await getEpisode(params.id);
+
   return (
-    <div>
+    <div className="container py-8">
       <Episode episode={episode} />
     </div>
   );

@@ -4,19 +4,17 @@ import { lastDigitsUrl } from "@/lib/utils";
 
 const Episode = ({ episode }: { episode: EpisodeModel }) => {
   return (
-    <>
-      <div>
-        <div>{episode.name}</div>
-        <div>air_date: {episode.air_date}</div>
-        <div>
-          episode:
-          <Link href={`/episode/${lastDigitsUrl(episode.url)}`}>
-            {episode.episode}
-          </Link>
-        </div>
-        <div>characters {episode.characters}</div>
-      </div>
-    </>
+    <div className="space-y-2">
+      <h2 className="text-lg font-semibold">{episode.name}</h2>
+      <p>Air date: {episode.air_date}</p>
+      <p>
+        Episode: {" "}
+        <Link href={`/episode/${lastDigitsUrl(episode.url)}`} className="underline">
+          {episode.episode}
+        </Link>
+      </p>
+      <p>Characters in episode: {episode.characters.length}</p>
+    </div>
   );
 };
 
