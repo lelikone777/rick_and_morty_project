@@ -92,9 +92,7 @@ export default function Page() {
         </div>
       </div>
 
-      <div
-        className={`sm:container ${typeof window !== "undefined" && window.innerWidth >= 480 ? "container" : ""}`}
-      >
+      <div className="xs:container">
         <ul className="3xl:grid-cols-5 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
           {visibleCharsOnPage.map((char: CharsModel) => (
             <li

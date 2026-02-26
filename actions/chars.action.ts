@@ -2,7 +2,7 @@ import {baseUrl} from "@/constants";
 
 export async function getChars() {
     const requests = Array.from({ length: 42 }, (_, i) =>
-        fetch(`${baseUrl}/character/?page=${i + 1}`)
+        fetch(`${baseUrl}character/?page=${i + 1}`)
     );
 
     const responses = await Promise.all(requests);
@@ -27,7 +27,7 @@ export async function getChars() {
 
 
 export async function getChar(charId: string) {
-    const response = await fetch(`${baseUrl}/character/${charId}`);
+    const response = await fetch(`${baseUrl}character/${charId}`);
     if (!response.ok) {
         throw new Error('Failed to fetch data getChar');
     }
